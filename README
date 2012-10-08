@@ -1,1 +1,47 @@
 This is the Bushfire Connect Ushahidi instance based on version 2.0 of Ushahidi
+
+How to rebuild the Ushahidi instance:
+* Import database export in the /database directory
+* copy contents of "ushahidi" directory to your web server (say a subdirectory called "ushahidi" in your web distribution directory)
+* edit the application/config/database.php with the appropriate config as below for the database (replace "TODO_TEXT" with relevant parameters.)
+
+$config['default'] = array
+(
+	'benchmark'     => TRUE,
+	'persistent'    => FALSE,
+	'connection'    => array
+	(
+		'type'     => 'mysql',
+		'user'     => 'TODO_TEXT_DATABASE_USERNAME',
+		'pass'     => 'TODO_TEXT_DATABASE_USERNAME_PASSWORD',
+		'host'     => 'TODO_TEXT_DATABASE_HOSTNAME',
+		'port'     => FALSE,
+		'socket'   => FALSE,
+		'database' => 'TODO_TEXT_DATABASE_NAME'
+	),
+	'character_set' => 'utf8',
+	'table_prefix'  => '',
+	'object'        => TRUE,
+	'cache'         => FALSE,
+	'escape'        => TRUE
+);
+
+* chmod directory/files
+
+chmod 777 application/config/config.php
+chmod 777 application/config
+chmod 777 application/cache
+chmod 777 application/logs
+chmod 777 media/uploads
+chmod 777 .htaccess
+
+* edit application/config/config.php so it has:
+
+$config['site_domain'] = 'localhost/ushahidi/';
+$config['site_protocol'] = 'http';
+$config['index_page'] = 'index.php';
+$config['internal_cache'] = FALSE;
+
+changing "localhost" to whatever your domain name is, and "ushahidi" to the subdirectory you uploaded the files to.
+
+* login as an admin http://localhost/ushahidi/index.php/login as admin/adm1n1st2011
